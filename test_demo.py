@@ -31,3 +31,16 @@ def test_multiple_posts(post_id):
       else:
             assert response.status_code==404
       print(f"测试帖子{post_id}完成")
+
+import pytest
+
+@pytest.fixture
+def prepare_data():
+      print("\n准备测试数据...")
+      data={"name":"张三","age":18}
+      yield data
+      print("\n清理测试数据...")
+
+def test_with_fixture(prepare_data):
+     print(f"使用测试数据：{prepare_data}")
+     assert prepare_data["name"]=="张三"
